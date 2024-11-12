@@ -45,6 +45,7 @@ export default {
     box-shadow: 5px 5px 5px rgba(222, 222, 222, 0.1);
     border: none;
     
+    
 }
 .each_category:hover{
     border: 1.6px solid #81B13D;
