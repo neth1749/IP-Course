@@ -1,102 +1,78 @@
 <script>
-import Category from './components/Category.vue';
-import Promotion from './components/Promotion.vue';
-
-import image1 from './assets/img/image1.png'; 
-import image2 from './assets/img/image2.png';
-
-import Csm_1 from './assets/img/Cms_1.jpg';
-import Csm_2 from './assets/img/Cms_2.png';
-import Csm_3 from './assets/img/Cms_3.jpg';
-
-import axios from "axios";
-
-export default {
-  name: "App",
-  components: {
-    Category,
-    Promotion,
+import axios from 'axios';
+import ButtonComponent from './components/ButtonComponent.vue';
+import CategoryComponent from './components/CategoryComponent.vue';
+import PromotionComponent from './components/PromotionComponent.vue';
+import {useProductStore} from './Product_Store.js'
+import { mapState } from 'pinia';
+export default{
+  name: 'App',
+  setup() {
+    const store = useProductStore()
+    return {
+      store
+    }
+  },
+  components:{
+    ButtonComponent,
+    CategoryComponent,
+    PromotionComponent
   },
   data() {
     return {
-      categories: [], 
-      promotions: [], 
-    };
+    
+    }
+},
+  computed: {
+    ...mapState(useProductStore, {
+      Categories: 'categories'
+    })
   },
-  mounted() {
-    this.fetchCategories();
-    this.fetchPromotions(); 
-  },
-  methods: {
-    async fetchCategories() {
-      try {
-        const response = await axios.get("http://localhost:3000/api/categories");
-        this.categories = response.data;
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    },
-    async fetchPromotions() {
-      try {
-        const response = await axios.get("http://localhost:3000/api/promotions");
-        this.promotions = response.data;
-      } catch (error) {
-        console.error("Error fetching promotions:", error);
-      }
-    },
-  },
-};
+
+  async mounted () {
+          // Mounted life cycle - It will be executed every time
+          // this component is loaded
+        await this.store.fetchCategories()
+        //console.log('categories', this.store.categories)
+
+     }
+}
 </script>
+
 <template>
 
-
-  <main class="main_content">
-    <div class="category_container">
-      <Category v-for="product in this.Data_Contegory" :key="product.Title" :style="product.Style" :image="product.Img"
-        :title="product.Title" :quantity="product.Quantity" />
-
-    </div>
-    <div class="Promotion_container">
-      <Promotion v-for="promotion in Data_promotion" 
-      :style="promotion.Style"
-      :key="promotion.content"
-      :Image="promotion.promotion_image"
-      :content="promotion.content"
-      />
-
-    </div>
-
-  </main>
-
+  <div class="category">
+    <template v-for="category in Categories">
+      <CategoryComponent :name="category.name" :amount="category.productCount" :color="category.color" :image="category.image"></CategoryComponent>
+    </template>
+  </div>
+  <div class="promotion">
+    <template v-for="promotion in Promotions">
+      <PromotionComponent :title="promotion.title" :color="promotion.color" :btnColor="promotion.buttonColor" :image="promotion.image"></PromotionComponent>
+    </template>
+  </div>
+  
+  <div>helloworld</div>
 </template>
 
-<style>
-.main_content {
-  min-height: 100vh;
-  padding-bottom: 2rem;
+<style scoped>
+.category{
+  padding-top: 20px;
+  margin: auto;
+  width: 90%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-
-
+  gap: 10px;
+  /* overflow-x: auto; */
 }
-
-.main_content .category_container {
-  gap: 1.2rem;
-  width: 100%;
-  padding: 1rem;
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
-  height: auto;
+.promotion{
+  padding-top: 40px;
+  margin: auto;
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
 }
-.main_content .Promotion_container{
-  width: 96%;
-  height: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
-  place-items: center;
-  row-gap: 1rem;
-}
-
 </style>
