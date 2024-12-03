@@ -1,57 +1,51 @@
-<script>
-
-export default {
-    name: "Button_Component",
-    props: {
-        promotion: Object,
-        shopNow: Function,
-    }
-}
-
-</script>
-
 <template>
- 
-    <button @click="shopNow(promotion)" class="Btn">Shop Now
-        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_4059_3)">
-                <path
-                    d="M10.345 4.32164L6.7675 0.744141L5.58917 1.92247L8.33333 4.66664H0V6.33331H8.33333L5.58917 9.07747L6.7675 10.2558L10.345 6.67831C10.6575 6.36576 10.833 5.94191 10.833 5.49997C10.833 5.05803 10.6575 4.63419 10.345 4.32164Z"
-                    fill="white" />
-            </g>
-            <defs>
-                <clipPath id="clip0_4059_3">
-                    <rect width="10.8333" height="10" fill="white" transform="translate(0 0.5)" />
-                </clipPath>
-            </defs>
-        </svg>
-
-
+    <button :style="{ backgroundColor: bgBtnColor }" @click="ShopNow">
+      Shop Now<svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24">
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 12H5m14 0-4 4m4-4-4-4" />
+      </svg>
     </button>
-
-</template>
-
-<style>
-.Btn {
-    background-color: #3BB77E;
-    border: none;
-    color: aliceblue;
+  </template>
+  
+  <script>
+  export default {
+    props: {
+      message: String,
+      bgBtnColor: String,
+      label: String,
+    },
+  
+    methods: {
+      ShopNow() {
+        alert(`Let's shop  ${this.message}!`);
+      },
+    },
+  };
+  </script>
+  
+  <style scoped>
+  button {
+    width: 100%;
     display: flex;
-    width: 6.5rem;
-    padding: .4rem;
-    height: 2rem;
     align-items: center;
-    justify-content: center;
-    gap: .4rem;
-    border-radius: .25rem;
-    font-weight: 550;
+    gap: 0.5rem;
+    justify-items: center;
+    padding: 8px 16px;
+    color: white;
+    /* background-color: #36b37e; */
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-}
-.Btn:hover{
-    background-color: #FDC040;
-}
-
-.Btn svg {
-    width: .8rem;
-}
-</style>
+  }
+  </style>
