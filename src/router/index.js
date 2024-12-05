@@ -1,4 +1,4 @@
-import HomeVue from "@/Views/HomeVue.vue";
+import HomeVue from "./Views/HomeVue.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -10,16 +10,16 @@ const router = createRouter({
       component: HomeVue,
     },
 
-    {
-      path: "/categories/:categoryID",
-      name: "Categories",
-      component: () => import("@/Views/ProductCategories.vue"),
-    },
-    {
-      path: "/products/:productID",
-      name: "Products",
-      component: () => import("@/Components/getProductByGroup.vue"),
-    },
+    // {
+    //   path: "/categories/:categoryID",
+    //   name: "Categories",
+    //   component: () => import("@/Views/ProductCategories.vue"),
+    // },
+    // {
+    //   path: "/products/:productID",
+    //   name: "Products",
+    //   component: () => import("./Components/getProductByGroup.vue"),
+    // },
   ],
 });
 

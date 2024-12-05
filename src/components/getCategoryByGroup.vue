@@ -11,7 +11,7 @@
   </template>
   
   <script>
-  import { useProductStore } from "@/stores/Product"; // Import the store
+  import { useProductStore } from "./stores/Product"; // Import the store
   
   export default {
     data() {
