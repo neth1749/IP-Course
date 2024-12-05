@@ -7,9 +7,9 @@
 // import { RouterView } from "vue-router";
 
 export default {
-  components: {
-    HomeVue,
-  },
+  // components: {
+  //   HomeVue,
+  // },
 
   data() {
     return {};
