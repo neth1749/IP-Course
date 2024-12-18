@@ -1,18 +1,13 @@
 <template>
   <RouterView />
 </template>
-
 <script>
-import HomeVue from "./views/HomeVue.vue";
 import { RouterView } from "vue-router";
 
 export default {
+  name: "App", // It's a good practice to give a name to your component.
   components: {
-    HomeVue,
-  },
-
-  data() {
-    return {};
+    RouterView,
   },
 };
 </script>
@@ -21,13 +16,11 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  border: 2px solid;
   box-sizing: border-box;
-
   color: black;
 }
 
 html {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff; /* Use hex for consistency */
 }
 </style>

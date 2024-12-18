@@ -10,24 +10,23 @@
   </template>
   
   <script>
-  import { useProductStore } from "./stores/Product"; // Adjust the path as needed
-  
+  import { useProductStore } from "@/stores/Products"; 
   export default {
     data() {
       return {
-        groupName: "fruits", // Set your group name here
+        groupName: "fruits", 
       };
     },
     computed: {
       // Access the getter through the store
       ProductsbyGroup() {
         const store = useProductStore();
-        return store.getProductsByGroup(this.groupName); // Accessing the getter
+        return store.getProductsByGroup(this.groupName); 
       },
     },
     mounted() {
       const store = useProductStore();
-      store.fetchProduct(); // Fetch products (or any necessary data)
+      store.fetchProduct(); 
     },
   };
   </script>

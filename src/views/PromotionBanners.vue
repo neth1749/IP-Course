@@ -1,6 +1,6 @@
 <template>
     <div class="promotion-banner-list">
-      <PromotionBanner
+      <Promotion
         v-for="(promote, index) in stores.promotions"
         :key="index"
         :title="promote.title"
@@ -12,11 +12,11 @@
   </template>
   
   <script>
-  import { useProductStore } from "./stores/product";
+  import { useProductStore } from "@/stores/Products.js";
   
-  import PromotionBanner from "../Components/PromotionBanner.vue";
+  import Promotion from "@/Components/Promotion.vue";
   export default {
-    components: { PromotionBanner },
+    components: { Promotion },
     setup() {
       const stores = useProductStore();
       return { stores };

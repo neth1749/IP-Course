@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { useProductStore } from "./stores/product"; // Adjust the path as needed
+import { useProductStore } from "@/stores/Products"; // Adjust the path as needed
 
 export default {
   computed: {

@@ -24,8 +24,8 @@
   
   <script>
   import Menu from "@/Components/Menu.vue";
-  import Product from "./Components/Product.vue";
-  import { useProductStore } from "./stores/product";
+  import Product from "@/Components/Product.vue";
+  import { useProductStore } from "@/stores/Products.js";
   import { mapState } from "pinia";
   
   export default {
@@ -53,7 +53,7 @@
           return this.products;
         }
   
-        return this.stores.getPopularProducts();
+        // return this.stores.getPopularProducts();
   
         return this.stores.getProductsByGroup(this.currentGroupName);
       },

@@ -11,20 +11,20 @@
   </template>
   
   <script>
-  import { useProductStore } from "./stores/product"; // Import the store
+  import { useProductStore } from "@/stores/Products"; 
   
   export default {
     computed: {
       // Access the categories directly from the store
       categories() {
         const store = useProductStore();
-        return store.categories; // Directly return categories from state
+        return store.categories; 
       },
   
       // Method to fetch products based on category id
       getProductsByCategory() {
         const store = useProductStore();
-        return store.getProductsByCategory; // Access the getter
+        return store.getProductsByCategory; 
       },
     },
     mounted() {

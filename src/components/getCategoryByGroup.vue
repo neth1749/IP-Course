@@ -11,18 +11,16 @@
   </template>
   
   <script>
-  import { useProductStore } from "./stores/Product"; // Import the store
+  import { useProductStore } from "@/stores/Products"; 
   
   export default {
     data() {
       return {
-        groupName: "fruits", // Set your group name here
+        groupName: "fruits", 
       };
     },
     computed: {
-      // Access the categories directly from the store
-  
-      // Method to fetch products based on group
+     
       getCategoryByGroup() {
         const store = useProductStore();
   

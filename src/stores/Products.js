@@ -9,11 +9,7 @@ export const useProductStore = defineStore("product", {
     currProductGroup: "All",
   }),
   getters: {
-    /**
-     * List all categories by group name
-     * @param {string} groupName
-     * @returns {Array} List of categories
-     */
+   
     getCategoriesByGroup: (state) => {
       return (groupName) => {
         return state.categories.filter(
@@ -22,22 +18,14 @@ export const useProductStore = defineStore("product", {
       };
     },
 
-    /**
-     * List all products by group name
-     * @param {string} groupName
-     * @returns {Array} List of products
-     */
+    
     getProductsByGroup: (state) => {
       return (groupName) => {
         return state.products.filter((product) => product.group === groupName);
       };
     },
 
-    /**
-     * List all products by a given categoryId
-     * @param {number} categoryId
-     * @returns {Array} List of products
-     */
+   
     getProductsByCategory: (state) => {
       return (categoryId) => {
         // Filter products by the provided categoryId
@@ -47,11 +35,7 @@ export const useProductStore = defineStore("product", {
       };
     },
 
-    /**
-     * List all popular products
-     * A product with countSold > 10 is considered popular
-     * @returns {Array} List of popular products
-     */
+  
     getPopularProducts: (state) => {
       // Log the countSold value of each product for debugging
       state.products.forEach((product) => {
@@ -66,7 +50,7 @@ export const useProductStore = defineStore("product", {
   actions: {
     fetchCategory() {
       axios
-        .get("http://localhost:3000/api/categories")
+        .get(`http://localhost:3000/api/categories`)
         .then((response) => {
           console.log(response.data); // Access the data
 
@@ -78,7 +62,7 @@ export const useProductStore = defineStore("product", {
     },
     fetchPromotion() {
       axios
-        .get("http://localhost:3000/api/promotions")
+        .get(`http://localhost:3000/api/promotions`)
         .then((response) => {
           console.log(response.data); // Access the data
 
@@ -90,7 +74,7 @@ export const useProductStore = defineStore("product", {
     },
     fetchGroup() {
       axios
-        .get("http://localhost:3000/api/groups")
+        .get(`http://localhost:3000/api/groups`)
         .then((response) => {
           console.log(response.data); // Access the data
 
@@ -102,7 +86,7 @@ export const useProductStore = defineStore("product", {
     },
     fetchProduct() {
       axios
-        .get("http://localhost:3000/api/products")
+        .get(`http://localhost:3000/api/products`)
         .then((response) => {
           console.log(response.data); // Access the data
 

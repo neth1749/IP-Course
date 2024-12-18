@@ -19,13 +19,9 @@
     </div>
   </template>
   <script>
-  import { useProductStore } from "./stores/product";
-  
-  import ProductCategory from "./Components/productCategory.vue";
-  import Menu from "@/Components/Menu.vue";
-  
-  import { mapState } from "pinia";
-  
+  import { useProductStore } from '@/stores/Products.js';
+ import Menu from '@/Components/Menu.vue';
+import ProductCategory from '@/Components/ProductCategory.vue';
   export default {
     components: { ProductCategory, Menu },
   
@@ -73,6 +69,7 @@
     },
   };
   </script>
+  
   <style scoped>
   .categories-withNavbar {
     display: flex;
