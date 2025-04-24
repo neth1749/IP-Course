@@ -15,12 +15,15 @@ class ProductController extends Controller
 
     // --- Post /api/products
     public function createProduct(Request $request) {
-        $products = new Product;
-        $products->name = $request->name;
-        $products->pricing = $request->pricing;
-        $products->category_id = $request->category_id;
-        $products->save();
-        return $products;
+        $product = Product::create([
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'pricing' => $request->pricing,
+            'description' => $request->description,
+            'images' => $request->images, // Automatically cast to JSONB
+        ]);
+        
+        return $product;
     }
 
     // --- Get /api/products/{productId}
