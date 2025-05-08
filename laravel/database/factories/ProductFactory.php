@@ -21,12 +21,14 @@ class ProductFactory extends Factory
 
     {
         return [
-            'name' => $this->faker->word(),
-            'category_id' => Category::factory(), // ← creates and links a category
-            'pricing' => $this->faker->randomFloat(2, 10, 200),
-            'description' => $this->faker->sentence(),
-           'images' => [$this->faker->imageUrl()],
-
+            'name' => $this->faker->words(3, true),
+            'pricing' => $this->faker->randomFloat(2, 10, 500), // not 'pricing'
+            'category_id' => Category::factory(),
+            'description' => $this->faker->sentence,
+            'images' => [
+                $this->faker->imageUrl(640, 480, 'product', true),
+                $this->faker->imageUrl(640, 480, 'product', true),
+            ],
         ];
     }
 }

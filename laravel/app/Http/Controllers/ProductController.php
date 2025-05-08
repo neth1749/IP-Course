@@ -14,43 +14,81 @@ class ProductController extends Controller
     }
 
     // --- Post /api/products
-    public function createProduct(Request $request) {
-        $product = Product::create([
-            'name' => $request->name,
-            'category_id' => $request->category_id,
-            'pricing' => $request->pricing,
-            'description' => $request->description,
-            'images' => $request->images, // Automatically cast to JSONB
-        ]);
-        
-        return $product;
-    }
+   // --- Post /api/products
+   public function createProduct(Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'pricing' => 'required|numeric|min:0',
+        'category_id' => 'required|integer|exists:categories,id',
+        'description' => 'nullable|string',
+        'images' => 'nullable|array',
+        'images.*' => 'url'
+    ]);
+
+    $product = Product::create($validated);
+
+    return response()->json($product, 201);
+}
 
     // --- Get /api/products/{productId}
-    public function getProduct($productId) {
-        $products = Product::find($productId);
-        return $products;
+   // --- Get /api/products/{productId}
+   public function findProductByID($productId) {
+    $product = Product::find($productId);
+
+    if (!$product) {
+        return response()->json(['message' => 'Product not found'], 404);
     }
 
-    // --- Patch /api/products/{productId}
-    public function updateProduct(Request $request, $productId) {
-        $products = Product::find($productId);
-        $products->name = $request->name;
-        $products->save();
-        return $products;
-    }
+    return response()->json($product, 200);
+}
 
-    // --- Delete /api/products/{productId}
-    public function deleteProduct($productId) {
-        $products = Product::find($productId);
-        $products->delete();
-        return $products;
-    }
+// --- Patch /api/products/{productId}
+public function updateProducts(Request $request, $productId)
+{
+$product = Product::find($productId);
 
-    // --- Get /api/categories/{categoryId}/products
-    public function getProductsByCategory($categoryId) {
-        $category = Category::with('products')->find($categoryId);
-        return $category->products;
-    }
+if (!$product) {
+    return response()->json([
+        'message' => 'Product not found'
+    ], 404);
+}
 
+$validatedData = $request->validate([
+    'name' => 'sometimes|string|max:255',
+    'category_id' => 'sometimes|exists:categories,id',
+    'pricing' => 'sometimes|numeric|min:0',
+    'description' => 'nullable|string',
+    'images' => 'nullable|array',
+]);
+
+if (isset($validatedData['images'])) {
+    $validatedData['images'] = json_encode($validatedData['images']);
+}
+
+$product->update($validatedData);
+
+return response()->json([
+    'message' => 'Product updated successfully',
+    'product' => $product->fresh(),
+], 200);
+}
+// --- Delete /api/products/{productId}
+public function deleteProducts($productId)
+{
+    $product = Product::find($productId);
+    if (!$product) {
+        return response()->json([
+            'message' => 'Product not found'
+        ], 404);
+    }
+    $product->delete();
+
+    return response()->json(['message' => 'Product deleted successfully']);
+}
+
+// --- Get /api/categories/{categoryId}/products
+public function getProductsByCategory($categoryId) {
+    $category = Category::with('products')->find($categoryId);
+    return $category->products;
+}
 }
